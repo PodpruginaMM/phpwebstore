@@ -5,10 +5,10 @@
     <img style="width: 200px" src="/img/goods/<?= $row['img'] ?>" alt="">
     <h2><?= $row['name'] ?></h2>
     <p><?= $row['price'] ?>р.</p>
-    <p><?= $row['info'] ?>р.</p>
+    <p><?= $row['info'] ?>.</p>
     <p>
 <!--        <a href="?p=cart&a=add&id=--><?//= $row['id'] ?><!--">В корзину</a>-->
-        <p style="cursor: pointer" @click="addGood">В корзину</p>
+        <button class="button" @click="addGood">В корзину</button><br>
         <a href="?p=good">Назад</a>
     </p>
 </div>

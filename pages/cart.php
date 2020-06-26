@@ -1,7 +1,34 @@
 <?php
 function indexAction()
 {
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
+    if(!isset($_SESSION['goods'])){
+    echo "Ваша корзина пуста.";
+    return;
+    //товары в корзине есть, запускаем цикл
+    } else {
+        buildCart(); 
+    }
+}
+
+//цикл для отрисовки элементов корзины из массива Сессии
+function buildCart()
+{
+    $goods = $_SESSION['goods'];
+    $totalSum = 0;
+    $totalItems = 0;
+    echo "<ol>";
+    foreach ($goods as $good) {
+       echo "<li><b>" . $good['name'] . "</b>";
+       echo "<p>Цена товара: " . $good['price'] . " &#8381</p>";
+       echo "<p>Количество: " . $good['count'] . " шт.";
+       echo "<p>Количество: " . $good['count'] . " шт.";
+       echo "<p><i>подитог: " . $good['price'] * $good['count'] . " &#8381</i></p></li>";
+       $totalSum = $totalSum + ($good['price'] * $good['count']);
+       $totalItems += $good['count'];
+    }
+    echo "</ol><p>Всего позиций: " . $totalItems . " </p><p><b>Итого: " . $totalSum . " &#8381</b></p>";
+    return;
 }
 
 function addAction()
@@ -88,4 +115,35 @@ function addGood($id)
 
     return '';
 }
+/*
+добавить еще товара в корзину
+*/
+function addGoodAction()
+{
+    if (empty($_GET['id'])) {
+        return "Передан пустой ID";
+    }
+    $id = $_GET['id'];
 
+    if (!empty($_SESSION['goods'][$id]['count'])) {
+        $_SESSION['goods'][$id]['count']++;
+        return '';
+    }
+    return '';
+}
+/*
+добавить еще товара в корзину
+*/
+function addGoodAction()
+{
+    if (empty($_GET['id'])) {
+        return "Передан пустой ID";
+    }
+    $id = $_GET['id'];
+
+    if (!empty($_SESSION['goods'][$id]['count'])) {
+        $_SESSION['goods'][$id]['count']++;
+        return '';
+    }
+    return '';
+}

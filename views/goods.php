@@ -8,7 +8,7 @@
     <h2><?= $row['name'] ?></h2>
     <img style="width: 200px" src="/img/goods/<?= $row['img'] ?>" alt="img<?= $row['id'] ?>">
     <p><a href="?p=good&a=one&id=<?= $row['id'] ?>">Подробнее</a></p>
-    <p style="cursor: pointer" onclick="send('<?= $row['id'] ?>')">В корзину</p>
+    <button class="button" @click="send('<?= $row['id'] ?>')">В корзину</button><br>
 <?php endforeach;?>
 
 
