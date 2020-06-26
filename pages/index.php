@@ -2,8 +2,8 @@
 function indexAction()
 {
     echo render('home.php', [
-        'title' => 'ПРивет',
-        'text' => '<p>Lorem ipsum dolor.</p>',
+        'title' => 'Привет',
+        'text' => '<p>Добро пожаловать в магазин</p>',
 
     ]);
 }
