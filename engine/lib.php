@@ -125,7 +125,8 @@ function getMenu()
     <li><a href="/?p=good">Товары</a></li>
     <li><a href="/?p=user">Пользователи</a></li>
     <li><a href="/?p=cart">Корзина <span id="countCart">' . $countCart . '</span></a></li>
-    <li><a href="/?p=auth">Авторизация</a></li>';
+    <li><a href="/?p=orders">Ваши заказы</a></li>
+    <li><a href="/?p=auth">Авторизация</a></li><hr>';
 
 }
 
