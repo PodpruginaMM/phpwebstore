@@ -9,6 +9,8 @@ function indexAction()
     } else {
         buildCart(); 
     }
+    echo "<a href=\"/\">На главную</a>";
+    return;
 }
 
 //цикл для отрисовки элементов корзины из массива Сессии
@@ -21,8 +23,9 @@ function buildCart()
     foreach ($goods as $good) {
        echo "<li><b>" . $good['name'] . "</b>";
        echo "<p>Цена товара: " . $good['price'] . " &#8381</p>";
-       echo "<p>Количество: " . $good['count'] . " шт.";
-       echo "<p>Количество: " . $good['count'] . " шт.";
+       echo "<p>Количество: " . $good['count'] . " шт.</p>";
+       echo "<a href=\"?p=cart&a=addGood&id=" . $good['id'] . "\">Добавить еще</a></br>";
+       echo "<a href=\"?p=cart&a=delGood&id=" . $good['id'] . "\">Убрать</a></br>";
        echo "<p><i>подитог: " . $good['price'] * $good['count'] . " &#8381</i></p></li>";
        $totalSum = $totalSum + ($good['price'] * $good['count']);
        $totalItems += $good['count'];
@@ -111,6 +114,7 @@ function addGood($id)
         'name' => $row['name'],
         'price' => $row['price'],
         'count' => 1,
+        'id' => $row['id'],
     ];
 
     return '';
@@ -127,23 +131,33 @@ function addGoodAction()
 
     if (!empty($_SESSION['goods'][$id]['count'])) {
         $_SESSION['goods'][$id]['count']++;
-        return '';
+        header("location:/?p=cart");
+        return;
     }
+
     return '';
 }
 /*
-добавить еще товара в корзину
+убрать товар из корзины
 */
-function addGoodAction()
+function delGoodAction()
 {
     if (empty($_GET['id'])) {
         return "Передан пустой ID";
     }
     $id = $_GET['id'];
-
-    if (!empty($_SESSION['goods'][$id]['count'])) {
-        $_SESSION['goods'][$id]['count']++;
-        return '';
+    //если больше единицы - убираем
+    if (($_SESSION['goods'][$id]['count'])>1) {
+        $_SESSION['goods'][$id]['count']--;
+        header("location:/?p=cart");
+        return;
     }
+    //если равен нулю убираем подмассив в массиве
+    if (($_SESSION['goods'][$id]['count'])==1) {
+        unset($_SESSION['goods'][$id]);
+        header("location:/?p=cart");
+        return;
+    }
+
     return '';
 }
