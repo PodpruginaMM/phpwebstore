@@ -1,0 +1,23 @@
+
+Заказ номер 4
+
+Состав заказа: {"5":{"name":"Пеньковый прямоугольник","price":"21000","count":1,"id":"5"},"6":{"name":"Сумка Фродо","price":"6000","count":2,"id":"6"}}
+
+Статус заказа: paid
+
+
+<p>Состав заказа: <?= $row['cart'] ?></p>
+
+<?php foreach($row as $item_row) :?>
+        <li>Товар: <?= $item_row ?></li>
+    <?php endforeach;?>
+
+
+old sql
+
+$sql = "UPDATE
+        `orders`
+        SET
+            (state='".$status."')
+        WHERE id=$id";
+    
