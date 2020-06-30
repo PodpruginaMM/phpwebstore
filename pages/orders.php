@@ -8,13 +8,13 @@ function allAction()
 {
     //проверяем залогинен ли пользователь
     if (!isset($_SESSION['user']['login'])) {
-        echo 'Пожалуйста, авторизуйтесь';
+        echo 'Пожалуйста, <a href="?p=auth">авторизуйтесь</a>';
         return;
         exit;
     }
     buildOrders();
 }
-
+//отобразить заказы пользователя (оплаченные и сохраненные объекты корзины)
 function buildOrders() {
     $role = $_SESSION['user']['login'];
     $sql = "SELECT * FROM `orders` WHERE `user_name` = '{$role}'";
@@ -27,7 +27,7 @@ function buildOrders() {
             'title' => 'Ваши заказы'
         ]);
 }
-
+//подтвердить получение
 function confirmAction()
     {
         $link = mysqli_connect('localhost', 'root', '','gbphp');

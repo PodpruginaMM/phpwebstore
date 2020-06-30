@@ -38,7 +38,7 @@ function loginAction()
     $result = mysqli_query(getLink(), $sql);
     $row = mysqli_fetch_assoc($result);
     if (empty($row)) {
-        setMSG('Не верный логин или пароль');
+        setMSG('Неверный логин или пароль. <a href="?p=userAdd">Зарегистрироваться</a>');
         header('location: /?p=auth');
         return;
     }

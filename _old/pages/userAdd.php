@@ -1,4 +1,5 @@
 <?php
+$link = mysqli_connect('localhost', 'root', '','gbphp');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_POST['fio']) || empty($_POST['login']) || empty($_POST['password'])) {
         header('Location: /?page=4');
