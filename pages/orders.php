@@ -27,3 +27,16 @@ function buildOrders() {
             'title' => 'Ваши заказы'
         ]);
 }
+
+function confirmAction()
+    {
+        $link = mysqli_connect('localhost', 'root', '','gbphp');
+        $user_name = $_SESSION['user']['login'];
+        $status = "Успешно доставлен";
+        $id = getId();
+        $sql = "UPDATE orders SET state='".$status."' WHERE id=$id";    
+        mysqli_query($link, $sql) or die(mysqli_error($link));
+        header('Location: /?p=orders');
+        exit;
+    }
+    

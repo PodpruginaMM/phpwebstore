@@ -6,7 +6,6 @@ function indexAction()
     return;
     //товары в корзине есть, запускаем цикл
     } else {
-        echo var_dump($_SESSION['goods']);
         buildCart(); 
     }
     echo "<a class=\"button\" href=\"?p=cart&a=pay\">Оплатить</a><br>";
@@ -161,20 +160,20 @@ function delGoodAction()
     }
 
     return '';
-}
+    }
 
 //оплатить заказ (отправить данные в массив orders)
 function payAction()
 {
     $link = mysqli_connect('localhost', 'root', '','gbphp');
     $user_name = $_SESSION['user']['login'];
-    $cart = json_encode($_SESSION['goods']);
-    $status = "paid";
+    $cart = json_encode($_SESSION['goods'], JSON_UNESCAPED_UNICODE);
+    $status = "Оплачен";
     $sql = "INSERT INTO
-    orders
+    `orders`
         (user_name, cart, state)
     VALUES
-        ($user_name, $cart, $status)";
+        ('".$user_name."','".$cart."','".$status."')";
 
     mysqli_query($link, $sql) or die(mysqli_error($link));
     $_SESSION['goods'] = array();
